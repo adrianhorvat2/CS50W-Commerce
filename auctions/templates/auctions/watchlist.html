@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>Watchlist</h2>
+<div class="container">
+    {% for watching in user.watching.all %}
+        <a href="{% url 'listing' watching.id %}" style="text-decoration: none;">
+            <div class="card">
+                <img src="{{ watching.image }}" alt="{{ watching.title }}">
+                <div class="card-body">
+                    <h5>{{ watching.title }}</h5>
+                    <p>Current Price: ${{ watching.price }}</p>
+                    <p>Description: {{ watching.description }}</p>
+                    <p>Listed by: {{ watching.created_by }}</p>
+                </div>
+            </div>
+        </a>
+    {% empty %}
+        <p>Your watchlist is empty.</p>
+    {% endfor %}
+</div>
+{% endblock %}

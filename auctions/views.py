@@ -107,3 +107,7 @@ def watchlist(request):
             user.watching.add(listing)
 
         return HttpResponseRedirect(reverse("listing", args=(listing_id,)))
+
+    return render(request, "auctions/watchlist.html", {
+        "listings": request.user.watching.all()
+    })
