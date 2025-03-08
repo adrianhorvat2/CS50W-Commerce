@@ -15,14 +15,14 @@
 
 {% if user.is_authenticated %}
     {% if user.username != listing.created_by.username %}
-        <form action="{% url 'watchlist' %}" method="POST">
+        <form action="{% url 'watchlist' %}" method="POST" class="watchlist-button">
             {% csrf_token %}
             {% if listing in user.watching.all %}
                 <input type="hidden" name="listing_id" value="{{ listing.id }}">
-                <input type="submit" value="Remove from Watchlist">
+                <input type="submit" value="Remove from Watchlist" class="btn btn-danger">
             {% else %}
                 <input type="hidden" name="listing_id" value="{{ listing.id }}">
-                <input type="submit" value="Add to Watchlist">
+                <input type="submit" value="Add to Watchlist" class="btn btn-success">
             {% endif %}
         </form>
     {% endif %}
