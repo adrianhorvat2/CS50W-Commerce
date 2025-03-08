@@ -6,7 +6,10 @@ class User(AbstractUser):
     pass
 
 class Category(models.Model):
-    name = models.TextField(max_length=64) 
+    name = models.TextField(max_length=64)
+
+    def __str__(self):
+        return f'{self.name}' 
 
 class Listing(models.Model):
     title = models.TextField(max_length=64)
@@ -17,14 +20,23 @@ class Listing(models.Model):
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
     image = models.URLField()
 
+    def __str__(self):
+        return f'{self.title} by {self.created_by}'
+
 class Comment(models.Model):
     text = models.TextField(max_length=512)
     created_by = models.ForeignKey(User, on_delete = models.CASCADE)
     created_at= models.DateTimeField(auto_now_add=True)
     listing = models.ForeignKey(Listing, on_delete = models.CASCADE)
 
+    def __str__(self):
+        return f'{self.text} by {self.created_by} on {self.listing}'
+
 class Bid(models.Model):
     amount = models.IntegerField()
     created_by = models.ForeignKey(User, on_delete = models.CASCADE)
     created_at= models.DateTimeField(auto_now_add=True)
     listing = models.ForeignKey(Listing, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return f'{self.amount} by {self.created_by} on {self.listing}'
