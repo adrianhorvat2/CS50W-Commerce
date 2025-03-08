@@ -87,3 +87,23 @@ def create_listing(request):
     return render(request, "auctions/create_listing.html", {
         "categories": categorys
     })
+
+def listing(request, listing_id):
+    listing = Listing.objects.get(id=listing_id)
+
+    return render(request, "auctions/listing.html", {
+        "listing": listing
+    })
+
+def watchlist(request):
+    if request.method == 'POST':
+        listing_id = request.POST["listing_id"]
+        listing = Listing.objects.get(id=listing_id)
+        user = request.user
+
+        if listing in user.watching.all():
+            user.watching.remove(listing)
+        else:
+            user.watching.add(listing)
+
+        return HttpResponseRedirect(reverse("listing", args=(listing_id,)))

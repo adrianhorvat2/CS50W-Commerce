@@ -49,3 +49,23 @@ body {
     font-size: 14px;
     color: #555;
 }
+
+.listing-container {
+    padding: 0;
+    margin: 0;
+}
+
+.listing-content {
+    display: flex;
+}
+
+.listing-image {
+    max-width: 300px;
+    margin-right: 20px;
+}
+
+.listing-details {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}

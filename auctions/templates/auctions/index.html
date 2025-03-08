@@ -4,6 +4,7 @@
 <h2>Active Listings</h2>
     <div class="container">
         {% for listing in listings %}
+        <a href="{% url 'listing' listing.id %}" style="text-decoration: none;">
             <div class="card">
                 <img src="{{ listing.image }}" alt="{{ listing.title }}">
                 <div class="card-body">
@@ -13,6 +14,7 @@
                     <p>Listed by: {{ listing.created_by }}</p>
                 </div>
             </div>
+        </a>
         {% endfor %}
     </div>
 {% endblock %}

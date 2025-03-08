@@ -19,6 +19,7 @@ class Listing(models.Model):
     created_at= models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
     image = models.URLField()
+    watching = models.ManyToManyField(User, blank=True, related_name='watching')
 
     def __str__(self):
         return f'{self.title} by {self.created_by}'
