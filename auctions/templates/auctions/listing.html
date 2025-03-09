@@ -12,6 +12,13 @@
             <p><strong>Starting price:</strong> {{ listing.price }} $</p>
             <p><strong>Current Price:</strong> {{ listing.bid_price|floatformat:2 }} $</p>
             <p>Posted by <strong>{{ listing.created_by.username }}</strong> on {{ listing.created_at }}</p>
+            {% if not is_closed %}
+                {% if winner == user %}
+                    <div class="auction-message">
+                        You are winning this auction currently.
+                    </div>
+                {% endif %}
+            {% endif %}
     </div>
 </div>
 
@@ -51,17 +58,11 @@
                 
         {% endif %}
 
-        {% if message %}
-            {% if message == "Your bid was placed successfully!" %}
-                <div class="alert-message success toast-message">
-                    {{ message }}
-                </div>
-            {% elif message == "Your bid must be higher than the current price." %}
-                <div class="alert-message error toast-message">
-                    {{ message }}
-                </div>
-            {% endif %}
-        {% endif %}
+        {% for message in messages %}
+        <div class="alert-message {% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+        </div>
+        {% endfor %}
     
     {% else %}
         {% if is_closed %}

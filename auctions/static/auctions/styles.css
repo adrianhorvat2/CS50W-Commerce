@@ -151,6 +151,9 @@ h1 {
     margin-top: 15px;
 }
 
+.auction-message {
+    color: green;
+}
 
 .bid-button-container form {
     display: flex; 

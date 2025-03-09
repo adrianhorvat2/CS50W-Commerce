@@ -3,10 +3,10 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Listing, Category, Bid, Comment
+from .models import Listing, Category, Bid, Comment, User
 from decimal import Decimal
+from django.contrib import messages
 
-from .models import User
 
 
 def index(request):
@@ -112,7 +112,8 @@ def listing(request, listing_id):
         'is_closed': is_closed,
         'highest_bid': highest_bid,
         'winner': winner,
-        'comments': comments
+        'comments': comments,
+        'messages': messages.get_messages(request)
     })
 
 def watchlist(request):
@@ -143,14 +144,11 @@ def bid(request, listing_id):
             bid.save()
             listing.bid_price = bid_amount
             listing.save()
-            message = "Your bid was placed successfully!"
+            messages.success(request, "Your bid was placed successfully!")
         else:
-            message = "Your bid must be higher than the current price."
+            messages.error(request, "Your bid must be higher than the current price.")
 
-    return render(request, "auctions/listing.html", {
-        "listing": listing,  
-        "message": message  
-    })
+    return redirect(reverse("listing", args=[listing_id]))
 
 def close_auction(request, listing_id):
 
