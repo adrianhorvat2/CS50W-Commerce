@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Listing, Category
+from .models import Listing, Category, Bid, Comment
+from decimal import Decimal
 
 from .models import User
 
@@ -110,4 +111,24 @@ def watchlist(request):
 
     return render(request, "auctions/watchlist.html", {
         "listings": request.user.watching.all()
+    })
+
+def bid(request, listing_id):  
+    if request.method == "POST":
+        listing = Listing.objects.get(id=listing_id)
+        user = request.user
+        bid_amount = Decimal(request.POST["bid"])
+
+        if bid_amount > listing.price:
+            bid = Bid(amount=bid_amount, created_by=user, listing=listing)
+            bid.save()
+            listing.price = bid_amount
+            listing.save()
+            message = "Your bid was placed successfully!"
+        else:
+            message = "Your bid must be higher than the current price."
+
+    return render(request, "auctions/listing.html", {
+        "listing": listing,  
+        "message": message  
     })

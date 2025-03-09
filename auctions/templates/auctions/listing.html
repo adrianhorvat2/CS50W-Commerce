@@ -25,6 +25,19 @@
                 <input type="submit" value="Add to Watchlist" class="btn btn-success">
             {% endif %}
         </form>
+
+        <form action="{% url 'bid' listing.id %}" method="POST" class="bid-button">
+            {% csrf_token %}
+            <input type="number" name="bid" placeholder="Bid amount" class="form-control">
+            <input type="submit" value="Bid" class="btn btn-primary">
+        </form>
+
+        {% if message %}
+            <div>
+                {{ message }}
+            </div>
+        {% endif %}
+        
     {% endif %}
 {% endif %}
 
