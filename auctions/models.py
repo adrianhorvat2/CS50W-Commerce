@@ -21,6 +21,8 @@ class Listing(models.Model):
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
     image = models.URLField()
     watching = models.ManyToManyField(User, blank=True, related_name='watching')
+    is_active = models.BooleanField(default=True)
+    listing_winner = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True, related_name='listing_winner')
 
     def __str__(self):
         return f'{self.title} by {self.created_by}'

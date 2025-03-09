@@ -62,37 +62,45 @@ body {
 .listing-image {
     max-width: 300px;
     margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .listing-details {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 10px;
+    background-color: #f8f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: fit-content;
+    width: 100%; 
+    box-sizing: border-box;  
 }
 
-/* Kontejner za obje forme */
+.listing-details p {
+    max-width: 700px;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}
+
 .buttons-container {
-    display: flex;  /* Postavlja obje forme u horizontalni red */
-    gap: 25px;      /* Razmak između Watchlist i Bid formi (sada 25px) */
+    display: flex;  
+    gap: 25px;
     margin-top: 15px;
 }
 
 
-
-/* Raspored za Bid formu: input i dugme jedno pored drugog */
 .bid-button-container form {
-    display: flex;  /* Postavljanje inputa i dugmeta u horizontalni red */
-    gap: 10px;  /* Razmak između inputa i dugmeta */
-    align-items: center;  /* Poravnavanje oba elementa */
+    display: flex; 
+    gap: 10px; 
+    align-items: center; 
 }
 
-/* Stil za Bid input polje */
 .bid-input {
     width: 150px; 
     padding: 5px;
 }
 
-/* Stil za Bid dugme */
 .bid-btn {
     background-color: #f39c12; 
     color: white;
@@ -104,36 +112,31 @@ body {
     color: white; 
 }
 
-
-/* Osnovni stil za toast poruke */
 .alert-message {
-    position: fixed;  /* Postavljamo na fiksnu poziciju da bude u vrhu stranice */
-    top: 20px;        /* Razmak od vrha */
-    left: 50%;        /* Centriranje */
-    transform: translateX(-50%); /* Centriranje */
+    position: fixed;  
+    top: 20px;        
+    left: 50%;       
+    transform: translateX(-50%); 
     padding: 15px 25px;
     border-radius: 8px;
     font-size: 16px;
-    opacity: 0;       /* Početna nevidljivost */
-    visibility: hidden; /* Početna nevidljivost */
-    z-index: 1000;    /* Osiguravamo da bude iznad drugih elemenata */
+    opacity: 0;      
+    visibility: hidden; 
+    z-index: 1000;    
     transition: opacity 0.5s ease, visibility 0.5s ease;
-    animation: toast-in 0.5s forwards, toast-out 0.5s forwards 2s; /* Animacija */
+    animation: toast-in 0.5s forwards, toast-out 0.5s forwards 2s; 
 }
 
-/* Stil za uspješne poruke */
 .alert-message.success {
     background-color: #28a745;
     color: white;
 }
 
-/* Stil za greške */
 .alert-message.error {
     background-color: #dc3545;
     color: white;
 }
 
-/* Animacija za prikazivanje poruke (fade-in) */
 @keyframes toast-in {
     0% {
         opacity: 0;
@@ -145,7 +148,6 @@ body {
     }
 }
 
-/* Animacija za nestajanje poruke (fade-out) */
 @keyframes toast-out {
     0% {
         opacity: 1;
@@ -155,4 +157,32 @@ body {
         opacity: 0;
         visibility: hidden;
     }
+}
+
+.auction-message {
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+    max-width: fit-content;
+}
+
+.closed-auction-message {
+    background-color: #f8d7da; 
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.user-winner-auction-message {
+    background-color: #d4edda;  
+    color: #155724; 
+    border: 1px solid #c3e6cb; 
+}
+
+.other-winner-auction-message {
+    background-color: #fff3cd;  
+    color: #856404;  
+    border: 1px solid #ffeeba; 
 }

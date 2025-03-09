@@ -11,10 +11,12 @@ from .models import User
 
 def index(request):
 
-    listings = Listing.objects.all()
+    active_listings = Listing.objects.filter(is_active=True)
+    closed_listings = Listing.objects.filter(is_active=False)
 
     return render(request, "auctions/index.html", {
-        "listings": listings
+        "active_listings": active_listings,
+        "closed_listings": closed_listings
     })
 
 
@@ -91,10 +93,23 @@ def create_listing(request):
     })
 
 def listing(request, listing_id):
+    
     listing = Listing.objects.get(id=listing_id)
 
-    return render(request, "auctions/listing.html", {
-        "listing": listing
+    is_closed = not listing.is_active
+
+    highest_bid = Bid.objects.filter(listing=listing).order_by('-amount').first()
+
+    if highest_bid:
+        winner = highest_bid.created_by
+    else:
+        winner = None
+
+    return render(request, 'auctions/listing.html', {
+        'listing': listing,
+        'is_closed': is_closed,
+        'highest_bid': highest_bid,
+        'winner': winner,
     })
 
 def watchlist(request):
@@ -133,3 +148,17 @@ def bid(request, listing_id):
         "listing": listing,  
         "message": message  
     })
+
+def close_auction(request, listing_id):
+
+    if request.method == "POST":
+        listing = Listing.objects.get(id=listing_id)
+        listing.is_active = False
+        listing.save()
+
+        bid = Bid.objects.filter(listing=listing).order_by('-amount').first()
+        user = bid.created_by
+        listing.winner = user
+        listing.save()
+
+    return HttpResponseRedirect(reverse("listing", args=(listing_id,)))
