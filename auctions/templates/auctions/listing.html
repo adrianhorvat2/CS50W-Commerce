@@ -2,8 +2,9 @@
 
 {% block body %}
 <div class="listing-container">
-    <h2>{{ listing.title }}</h2>
-
+    <div class="listing-title">
+        {{ listing.title }}
+    </div>
     <div class="listing-content">
         <img src="{{ listing.image }}" alt="{{ listing.title }}" class="listing-image">
         <div class="listing-details">
@@ -46,7 +47,8 @@
                         <input type="submit" value="Bid" class="btn btn-warning bid-btn">
                     </form>
                 </div>
-            </div>
+            </div>                  
+                
         {% endif %}
 
         {% if message %}
@@ -72,6 +74,36 @@
                 </form>
             </div>
         {% endif %}
+    {% endif %}
+{% endif %}
+
+<div class="comments-header">
+    Comments
+</div>
+{% if comments %}
+    <div class="comments-container">
+        {% for comment in comments %}
+            <div class="comment">
+                <strong>{{ comment.created_by.username }}</strong> on {{ comment.created_at }} says:
+                <p>{{ comment.text }}</p> 
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No comments yet.</p>
+{% endif %}
+
+{% if not is_closed %}
+    {% if user.is_authenticated %}
+        <div class="comment-form-container">
+            <form action="{% url 'comment' listing.id %}" method="POST" class="comment-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="comment" placeholder="Write your comment..." class="comment-input" required>
+                    <button type="submit" class="submit-comment-btn">Post Comment</button>
+                </div>
+            </form>
+        </div>
     {% endif %}
 {% endif %}
 

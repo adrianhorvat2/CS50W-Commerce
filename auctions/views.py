@@ -93,7 +93,7 @@ def create_listing(request):
     })
 
 def listing(request, listing_id):
-    
+
     listing = Listing.objects.get(id=listing_id)
 
     is_closed = not listing.is_active
@@ -105,11 +105,14 @@ def listing(request, listing_id):
     else:
         winner = None
 
+    comments = Comment.objects.filter(listing=listing)
+
     return render(request, 'auctions/listing.html', {
         'listing': listing,
         'is_closed': is_closed,
         'highest_bid': highest_bid,
         'winner': winner,
+        'comments': comments
     })
 
 def watchlist(request):
@@ -162,3 +165,15 @@ def close_auction(request, listing_id):
         listing.save()
 
     return HttpResponseRedirect(reverse("listing", args=(listing_id,)))
+
+def comment(request, listing_id):
+
+    if request.method == 'POST':
+        listing = Listing.objects.get(id=listing_id)
+        user = request.user
+        comment_text = request.POST["comment"]
+
+        comment = Comment(text=comment_text, created_by=user, listing=listing, created_at=listing.created_at)
+        comment.save()
+
+        return HttpResponseRedirect(reverse("listing", args=(listing_id,)))
