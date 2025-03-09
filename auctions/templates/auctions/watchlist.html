@@ -4,14 +4,14 @@
 <h2>Watchlist</h2>
 <div class="container">
     {% for listing in listings %}
-        <a href="{% url 'listing' watching.id %}" style="text-decoration: none;">
+        <a href="{% url 'listing' listing.id %}" style="text-decoration: none;">
             <div class="card">
-                <img src="{{ watching.image }}" alt="{{ watching.title }}">
+                <img src="{{ listing.image }}" alt="{{ listing.title }}">
                 <div class="card-body">
-                    <h5>{{ watching.title }}</h5>
-                    <p>Current Price: ${{ watching.price }}</p>
-                    <p>Description: {{ watching.description }}</p>
-                    <p>Listed by: {{ watching.created_by }}</p>
+                    <h5>{{ listing.title }}</h5>
+                    <p>Current Price: ${{ listing.price }}</p>
+                    <p>Description: {{ listing.description }}</p>
+                    <p>Listed by: {{ listing.created_by }}</p>
                 </div>
             </div>
         </a>
