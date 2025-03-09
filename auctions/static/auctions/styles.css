@@ -70,6 +70,89 @@ body {
     border-radius: 10px;
 }
 
-.watchlist-button {
-    margin-top: 20px;
+/* Kontejner za obje forme */
+.buttons-container {
+    display: flex;  /* Postavlja obje forme u horizontalni red */
+    gap: 25px;      /* Razmak između Watchlist i Bid formi (sada 25px) */
+    margin-top: 15px;
+}
+
+
+
+/* Raspored za Bid formu: input i dugme jedno pored drugog */
+.bid-button-container form {
+    display: flex;  /* Postavljanje inputa i dugmeta u horizontalni red */
+    gap: 10px;  /* Razmak između inputa i dugmeta */
+    align-items: center;  /* Poravnavanje oba elementa */
+}
+
+/* Stil za Bid input polje */
+.bid-input {
+    width: 150px; 
+    padding: 5px;
+}
+
+/* Stil za Bid dugme */
+.bid-btn {
+    background-color: #f39c12; 
+    color: white;
+    border: none;
+}
+
+.bid-btn:hover {
+    background-color: #e67e22; 
+    color: white; 
+}
+
+
+/* Osnovni stil za toast poruke */
+.alert-message {
+    position: fixed;  /* Postavljamo na fiksnu poziciju da bude u vrhu stranice */
+    top: 20px;        /* Razmak od vrha */
+    left: 50%;        /* Centriranje */
+    transform: translateX(-50%); /* Centriranje */
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    opacity: 0;       /* Početna nevidljivost */
+    visibility: hidden; /* Početna nevidljivost */
+    z-index: 1000;    /* Osiguravamo da bude iznad drugih elemenata */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    animation: toast-in 0.5s forwards, toast-out 0.5s forwards 2s; /* Animacija */
+}
+
+/* Stil za uspješne poruke */
+.alert-message.success {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Stil za greške */
+.alert-message.error {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Animacija za prikazivanje poruke (fade-in) */
+@keyframes toast-in {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Animacija za nestajanje poruke (fade-out) */
+@keyframes toast-out {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
