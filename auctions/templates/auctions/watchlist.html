@@ -3,7 +3,7 @@
 {% block body %}
 <h2>Watchlist</h2>
 <div class="container">
-    {% for watching in user.watching.all %}
+    {% for listing in listings %}
         <a href="{% url 'listing' watching.id %}" style="text-decoration: none;">
             <div class="card">
                 <img src="{{ watching.image }}" alt="{{ watching.title }}">

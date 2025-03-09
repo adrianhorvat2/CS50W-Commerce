@@ -130,7 +130,7 @@ def watchlist(request):
         return HttpResponseRedirect(reverse("listing", args=(listing_id,)))
 
     return render(request, "auctions/watchlist.html", {
-        "listings": request.user.watching.all()
+        "listings": request.user.watching.filter(is_active=True)
     })
 
 def bid(request, listing_id):  
