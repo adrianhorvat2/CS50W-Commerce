@@ -10,6 +10,68 @@ body {
     padding: 20px;
 }
 
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.listings-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+}
+
+.nav {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    color: white;
+    background-color: rgb(209, 209, 214);
+}
+
+.nav-link[href*="login"]:hover {
+    color: white;
+    background-color: green;
+    border-color: green;
+}
+
+.nav-link[href*="register"]:hover {
+    color: white;
+    background-color: green;
+    border-color: green;
+}
+
+.nav-link[href*="logout"]:hover {
+    color: white;
+    background-color: red;
+    border-color: red;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;

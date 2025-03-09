@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-<h2>Active Listings</h2>
+<div class="listings-header">Active Listings</div>
 <div class="container">
     {% for listing in active_listings %}
     <a href="{% url 'listing' listing.id %}" style="text-decoration: none;">
@@ -20,7 +20,7 @@
     {% endfor %}
 </div>
 
-<h2>Closed Listings</h2>
+<div class="listings-header">Closed Listings</div>
 <div class="container">
     {% for listing in closed_listings %}
     <a href="{% url 'listing' listing.id %}" style="text-decoration: none;">
