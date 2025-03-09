@@ -14,7 +14,8 @@ class Category(models.Model):
 class Listing(models.Model):
     title = models.TextField(max_length=64)
     description = models.TextField(max_length=512)
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    bid_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_by = models.ForeignKey(User, on_delete = models.CASCADE)
     created_at= models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
