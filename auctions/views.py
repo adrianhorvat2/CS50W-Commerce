@@ -76,9 +76,10 @@ def create_listing(request):
         price = request.POST["price"]
         image = request.POST["image"]
         category_id = request.POST["category"]
+        bid_price = request.POST["price"]
         category = Category.objects.get(id=category_id)
 
-        listing = Listing(title=title, description=description, price=price, created_by=request.user, category=category, image=image)
+        listing = Listing(title=title, description=description, price=price, bid_price=bid_price, created_by=request.user, category=category, image=image)
         listing.save()
 
         return HttpResponseRedirect(reverse("index"))
@@ -119,10 +120,10 @@ def bid(request, listing_id):
         user = request.user
         bid_amount = Decimal(request.POST["bid"])
 
-        if bid_amount > listing.price:
+        if bid_amount > listing.bid_price:
             bid = Bid(amount=bid_amount, created_by=user, listing=listing)
             bid.save()
-            listing.price = bid_amount
+            listing.bid_price = bid_amount
             listing.save()
             message = "Your bid was placed successfully!"
         else:
