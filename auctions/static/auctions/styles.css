@@ -252,7 +252,7 @@ h1 {
     border: 1px solid #ffeeba; 
 }
 
-.comments-header, .listing-title {
+.comments-header, .listing-title, .categories-header {
     font-size: 28px;
     font-weight: bold;
     color: #333;
@@ -339,4 +339,32 @@ h1 {
 
 .submit-comment-btn:hover {
     background-color: #0056b3;
+}
+
+.categories-container {
+    display: flex;          
+    flex-wrap: wrap;        
+    gap: 15px;              
+    margin: 20px 0;        
+}
+
+
+.category-item {
+    text-decoration: none;
+    font-weight: bold; 
+    color: #333; 
+    padding: 10px 20px;    
+    border: 1px solid #ccc; 
+    border-radius: 20px;    
+    background-color: #f8f5f5; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    font-size: 16px;        
+    transition: background-color 0.3s, box-shadow 0.3s; 
+}
+
+.category-item:hover {
+    background-color: #e0e0e0;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #333;
+    text-decoration: none; 
 }
