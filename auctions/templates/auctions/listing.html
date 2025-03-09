@@ -8,7 +8,8 @@
         <img src="{{ listing.image }}" alt="{{ listing.title }}" class="listing-image">
         <div class="listing-details">
             <p><strong>Description:</strong> {{ listing.description }}</p>
-            <p><strong>Current price:</strong> {{ listing.price }} $</p>
+            <p><strong>Starting price:</strong> {{ listing.price }} $</p>
+            <p><strong>Current Price:</strong> {{ listing.bid_price }} $</p>
             <p>Posted by <strong>{{ listing.created_by.username }}</strong> on {{ listing.created_at }}</p>
     </div>
 </div>
@@ -32,12 +33,16 @@
             <input type="submit" value="Bid" class="btn btn-primary">
         </form>
 
-        {% if message %}
-            <div>
+        {% if message == "Your bid was placed successfully!" %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% elif message == "Your bid must be higher than the current price." %}
+            <div class="alert alert-danger" role="alert">
                 {{ message }}
             </div>
         {% endif %}
-        
+
     {% endif %}
 {% endif %}
 
