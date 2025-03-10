@@ -133,20 +133,30 @@ def watchlist(request):
         "listings": request.user.watching.filter(is_active=True)
     })
 
-def bid(request, listing_id):  
+def bid(request, listing_id):
+
     if request.method == "POST":
         listing = Listing.objects.get(id=listing_id)
         user = request.user
         bid_amount = Decimal(request.POST["bid"])
 
-        if bid_amount > listing.bid_price:
-            bid = Bid(amount=bid_amount, created_by=user, listing=listing)
-            bid.save()
-            listing.bid_price = bid_amount
-            listing.save()
-            messages.success(request, "Your bid was placed successfully!")
-        else:
-            messages.error(request, "Your bid must be higher than the current price.")
+        if bid_amount < listing.price:
+            messages.error(request, f"Your bid must be at least the starting bid of {listing.price}.")
+            return redirect(reverse("listing", args=[listing_id]))
+
+        highest_bid = Bid.objects.filter(listing=listing).order_by("-amount").first()
+
+        if highest_bid and bid_amount <= highest_bid.amount:
+            messages.error(request, f"Your bid must be greater than the current highest bid of {highest_bid.amount}.")
+            return redirect(reverse("listing", args=[listing_id]))
+
+        bid = Bid(amount=bid_amount, created_by=user, listing=listing)
+        bid.save()
+
+        listing.bid_price = bid_amount
+        listing.save()
+
+        messages.success(request, "Your bid was placed successfully!")
 
     return redirect(reverse("listing", args=[listing_id]))
 
@@ -164,7 +174,7 @@ def close_auction(request, listing_id):
             listing.save()
         else:
             listing.winner = None
-             
+
     return HttpResponseRedirect(reverse("listing", args=(listing_id,)))
 
 def comment(request, listing_id):
