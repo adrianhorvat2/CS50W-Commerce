@@ -2,6 +2,7 @@
 
 {% block body %}
 
+<div class="login-card">
     <h2>Login</h2>
 
     {% if message %}
@@ -19,6 +20,9 @@
         <input class="btn btn-primary" type="submit" value="Login">
     </form>
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+    <div class="auth-links">
+        <p>Don't have an account?<span class="link-separator"></span><a href="{% url 'register' %}">Register here.</a></p>
+    </div>
+</div>
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
 {% block body %}
 
+<div class="registration-card">
     <h2>Register</h2>
 
     {% if message %}
@@ -25,6 +26,9 @@
         <input class="btn btn-primary" type="submit" value="Register">
     </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    <div class="auth-links">
+        <p>Already have an account?<span class="link-separator"></span><a href="{% url 'login' %}">Log In here.</a></p>
+    </div>
+</div>
 
 {% endblock %}

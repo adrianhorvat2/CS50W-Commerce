@@ -368,3 +368,60 @@ h1 {
     color: #333;
     text-decoration: none; 
 }
+
+.registration-card,
+.login-card {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    text-align: center;
+    position: relative; 
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.registration-card h2,
+.login-card h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.registration-card .form-group,
+.login-card .form-group {
+    margin-bottom: 15px;
+}
+
+.registration-card .btn-primary,
+.login-card .btn-primary {
+    width: 100%;
+}
+
+.auth-links {
+    margin-top: 20px;
+    text-align: center; 
+}
+
+.auth-links p {
+    margin: 10px 0;
+    font-size: 16px; 
+    color: #555; 
+}
+
+.auth-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600; 
+    transition: color 0.3s ease;
+}
+
+.auth-links a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.auth-links span {
+    margin-left: 5px;
+}
