@@ -18,6 +18,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+h2 {
+    font-weight: bold;
+}
+
 .listings-header {
     font-size: 28px;
     font-weight: bold;
@@ -105,6 +109,7 @@ h1 {
 .card-body h5 {
     font-size: 18px;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .card-body p {
