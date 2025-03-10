@@ -27,9 +27,17 @@
         {% if is_closed %}
             <div class="winner-message">
                 {% if winner == user %}
-                        <div class="auction-message user-winner-auction-message">You have won this auction with a bid of {{ listing.bid_price|floatformat:2 }} $</div>
+                <div class="auction-message user-winner-auction-message">
+                    You have won this auction with a bid of {{ listing.bid_price|floatformat:2 }} $
+                </div>
+                {% elif winner %}
+                    <div class="auction-message other-winner-auction-message">
+                        The winner of this auction is {{ winner.username }} with a bid of {{ listing.bid_price|floatformat:2 }} $
+                    </div>
                 {% else %}
-                        <div class="auction-message other-winner-auction-message">The winner of this auction is {{ winner.username }} with a bid of {{ listing.bid_price|floatformat:2 }} $</div>
+                    <div class="auction-message other-winner-auction-message">
+                        No winner for this auction.
+                    </div>
                 {% endif %}
             </div>
         {% else %}

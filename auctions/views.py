@@ -158,10 +158,13 @@ def close_auction(request, listing_id):
         listing.save()
 
         bid = Bid.objects.filter(listing=listing).order_by('-amount').first()
-        user = bid.created_by
-        listing.winner = user
-        listing.save()
-
+        if bid:  
+            user = bid.created_by
+            listing.winner = user
+            listing.save()
+        else:
+            listing.winner = None
+             
     return HttpResponseRedirect(reverse("listing", args=(listing_id,)))
 
 def comment(request, listing_id):
